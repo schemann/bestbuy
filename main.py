@@ -1,3 +1,5 @@
+"""Interactive command-line menu for the Best Buy store."""
+
 import products
 import store
 
@@ -48,7 +50,7 @@ def make_order(shop):
         return
     try:
         total_price = shop.order(shopping_list)
-    except Exception as error:
+    except ValueError as error:
         print(f"Error while making order! {error}")
         return
     print(f"********\nOrder made! Total payment: ${total_price}")
@@ -85,13 +87,14 @@ def get_menu_choice():
 def start(shop):
     """Run the interactive store menu for the given store until Quit."""
     while True:
-        label, action = MENU[get_menu_choice()]
+        _, action = MENU[get_menu_choice()]
         if action is None:
             break
         action(shop)
 
 
 def main():
+    """Set up the initial inventory and start the store menu."""
     # setup initial stock of inventory
     product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),

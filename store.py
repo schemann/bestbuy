@@ -1,3 +1,5 @@
+"""Store that holds products and processes orders."""
+
 from typing import List, Tuple
 
 import products
@@ -52,9 +54,9 @@ class Store:
 
         for product, quantity in requested.items():
             if not product.is_active():
-                raise Exception(f"{product.name} is not active and cannot be bought.")
+                raise ValueError(f"{product.name} is not active and cannot be bought.")
             if quantity > product.get_quantity():
-                raise Exception(
+                raise ValueError(
                     f"Only {product.get_quantity()} of {product.name} in stock, "
                     f"cannot order {quantity}."
                 )
@@ -66,6 +68,7 @@ class Store:
 
 
 def main():
+    """Exercise the Store class with the example from the assignment."""
     product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                     products.Product("Google Pixel 7", price=500, quantity=250),

@@ -1,3 +1,5 @@
+"""Product model for the Best Buy store."""
+
 class Product:
     """A product type available in the store, with its stock quantity."""
 
@@ -47,9 +49,9 @@ class Product:
         if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
             raise ValueError("Purchase quantity must be a positive integer.")
         if not self.active:
-            raise Exception(f"{self.name} is not active and cannot be bought.")
+            raise ValueError(f"{self.name} is not active and cannot be bought.")
         if quantity > self.quantity:
-            raise Exception(
+            raise ValueError(
                 f"Only {self.quantity} of {self.name} in stock, "
                 f"cannot buy {quantity}."
             )
@@ -59,6 +61,7 @@ class Product:
 
 
 def main():
+    """Exercise the Product class with the example from the assignment."""
     bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
     mac = Product("MacBook Air M2", price=1450, quantity=100)
 
